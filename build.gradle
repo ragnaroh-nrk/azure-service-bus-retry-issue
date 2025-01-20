@@ -1,0 +1,27 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation platform(SpringBootPlugin.BOM_COORDINATES)
+    implementation platform('com.azure.spring:spring-cloud-azure-dependencies:5.19.0')
+    implementation 'com.azure.spring:spring-cloud-azure-starter-servicebus'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+
+    // Override version in order to be able to connect to Service Bus emulator
+    implementation 'com.azure:azure-messaging-servicebus:7.17.8'
+}

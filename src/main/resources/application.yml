@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: azure-service-bus-retry-issue
+  cloud:
+    azure:
+      retry:
+        mode: fixed
+        fixed:
+          delay: 5s
+          max-retries: 3
+      servicebus:
+        connection-string: "Endpoint=sb://localhost;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=SAS_KEY_VALUE;UseDevelopmentEmulator=true;"
+        entity-type: queue
+        entity-name: queue.1
+        processor:
+          retry:
+            mode: fixed
+            fixed:
+              delay: 5s
+              max-retries: 3
+        retry:
+          mode: fixed
+          fixed:
+            delay: 5s
+            max-retries: 3
